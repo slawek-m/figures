@@ -1,5 +1,6 @@
-Figures is a simple package providing a way for creating and manipulation of geometrical ﬁgures.
-User can adds its own ﬁgures conforming the "Figure" interface. The manipulation of ﬁgures is
-realized in a batch form using the class "Batch". Batch runs commands implementing "Command" interface.
-User can add its own command conforming "Command" interface. Batch implements the methods "Execute" and
-"Validate" for applying commands and checking if after manipulations ﬁgures don't overlap.
+Figures is a simple package for creating and manipulating geometric figures.
+The user can add his own figures in accordance with the "Drawing" interface.
+Figure manipulation is done in batch form using the "Batch" class. Batch runs
+commands that implement the "Command" interface. The user can add his own command
+in accordance with the "Command" interface. Batch implements the "Execute" and "Validate"
+methods for executing commands and checking for overlapping figures after manipulations.
