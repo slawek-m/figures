@@ -49,12 +49,13 @@ bool Batch::Validate() {
     overlap_status.push_back(std::make_pair(id, res));
   });
 
+  bool res = true;
   if (std::find_if(overlap_status.begin(), overlap_status.end(),
                    [](const auto &pair) { return pair.second == false; }) !=
       overlap_status.end())
-    return false;
+    res = false;
 
   m_batch.clear();
 
-  return true;
+  return res;
 }
