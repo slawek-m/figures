@@ -23,7 +23,10 @@ void Canvas::SetColor(int x, int y, int color) {
   m_canvas.at(y).at(x) += color;
 };
 
-void Canvas::GetSize(int &x_size, int &y_size) { x_size = m_x_size; };
+void Canvas::GetSize(int &x_size, int &y_size) {
+  x_size = m_x_size;
+  y_size = m_y_size;
+};
 
 void Canvas::DrawCanvas() {
   for (int y = 0; y < m_y_size; ++y) {
