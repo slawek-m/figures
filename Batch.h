@@ -18,14 +18,12 @@ public:
   Batch &MoveFigure(int id, int offset_x, int offset_y);
   Batch &ColorFigure(int id, int color);
 
-  Batch &Execute();
-  Batch &ExecuteParallel();
+  virtual Batch &Execute();
   bool Validate();
 
-private:
+protected:
   CanvasManager<T> &m_cm;
   std::vector<std::unique_ptr<Command<T>>> m_batch;
-  unsigned int m_threads_num;
 };
 
 #endif

@@ -1,5 +1,8 @@
-Main: Main.o Batch.o Commands.o CanvasManager.o Canvas.o CanvasAtomicImpl.o CanvasNonAtomicImpl.o Rectangle.o Circle.o Triangle.o
-	g++ Main.o Batch.o Commands.o CanvasManager.o Canvas.o CanvasAtomicImpl.o CanvasNonAtomicImpl.o Rectangle.o Circle.o Triangle.o -o Main
+Main: Main.o BatchParallel.o Batch.o Commands.o CanvasManager.o Canvas.o CanvasAtomicImpl.o CanvasNonAtomicImpl.o Rectangle.o Circle.o Triangle.o
+	g++ Main.o BatchParallel.o Batch.o Commands.o CanvasManager.o Canvas.o CanvasAtomicImpl.o CanvasNonAtomicImpl.o Rectangle.o Circle.o Triangle.o -o Main
+
+BatchParallel.o: BatchParallel.cpp BatchParallel.h
+	g++ -Wall -c BatchParallel.cpp -o BatchParallel.o
 
 Batch.o: Batch.cpp Batch.h
 	g++ -Wall -c Batch.cpp -o Batch.o

@@ -1,4 +1,5 @@
 #include "Batch.h"
+#include "BatchParallel.h"
 #include "CanvasAtomicImpl.h"
 #include "CanvasNonAtomicImpl.h"
 #include <iostream>
@@ -7,17 +8,16 @@ int main() {
   {
     auto cai = std::make_unique<CanvasAtomicImpl<int>>();
     CanvasManager<int> cm(std::move(cai), 80, 80);
-    Batch<int> bt(cm);
+    BatchParallel<int> bt(cm);
 
     RectangleParams r1{0, 0, 20, 20, 1};
     RectangleParams r2{30, 30, 50, 50, 2};
 
-    bool res = bt.AddFigure(r1).AddFigure(r2).ExecuteParallel().Validate();
+    bool res = bt.AddFigure(r1).AddFigure(r2).Execute().Validate();
     std::cout << "batch result: " << res << std::endl;
     cm.ShowCanvas();
 
-    res =
-        bt.MoveFigure(1, 3, 3).MoveFigure(2, 3, 3).ExecuteParallel().Validate();
+    res = bt.MoveFigure(1, 3, 3).MoveFigure(2, 3, 3).Execute().Validate();
     std::cout << "batch result: " << res << std::endl;
     cm.ShowCanvas();
   }
