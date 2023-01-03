@@ -1,4 +1,4 @@
-Figures is a simple package for creating and manipulating geometric figures.
+Figures Multithread is a simple package for creating and manipulating geometric figures.
 The user can add his own figures in accordance with the "Figure" interface.
 Figure manipulation is done in batch form using the "Batch" class. Batch runs
 commands that implement the "Command" interface. Batch can use sequential or
