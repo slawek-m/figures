@@ -1,11 +1,24 @@
-#include "Batch.h"
-#include "BatchParallel.h"
-#include "CanvasAtomicImpl.h"
-#include "CanvasNonAtomicImpl.h"
+#include "Factory.h"
 #include <iostream>
 
 int main() {
   {
+    Factory<int, CanvasAtomicImpl> factory(80, 80);
+    auto cm = factory.CreateCanvasManager();
+    auto bt = factory.CreateBatch();
+
+    RectangleParams r1{0, 0, 20, 20, 1};
+    RectangleParams r2{30, 30, 50, 50, 2};
+
+    bool res = bt->AddFigure(r1).AddFigure(r2).Execute().Validate();
+    std::cout << "batch result: " << res << std::endl;
+    cm->ShowCanvas();
+
+    res = bt->MoveFigure(1, 3, 3).MoveFigure(2, 3, 3).Execute().Validate();
+    std::cout << "batch result: " << res << std::endl;
+    cm->ShowCanvas();
+  }
+  /*{
     auto cai = std::make_unique<CanvasAtomicImpl<int>>();
     CanvasManager<int> cm(std::move(cai), 80, 80);
     BatchParallel<int> bt(cm);
@@ -20,9 +33,26 @@ int main() {
     res = bt.MoveFigure(1, 3, 3).MoveFigure(2, 3, 3).Execute().Validate();
     std::cout << "batch result: " << res << std::endl;
     cm.ShowCanvas();
-  }
+  }*/
 
   {
+    Factory<int, CanvasNonAtomicImpl> factory(16, 16);
+    auto cm = factory.CreateCanvasManager();
+    auto bt = factory.CreateBatch();
+
+    RectangleParams r1{0, 0, 2, 2, 1};
+    RectangleParams r2{3, 3, 5, 5, 2};
+
+    bool res = bt->AddFigure(r1)
+                   .AddFigure(r2)
+                   .RemoveFigure(1)
+                   .MoveFigure(2, 1, 1)
+                   .Execute()
+                   .Validate();
+    std::cout << "batch result: " << res << std::endl;
+    cm->ShowCanvas();
+  }
+  /*{
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     CanvasManager<int> cm(std::move(cnai), 16, 16);
     Batch<int> bt(cm);
@@ -38,7 +68,7 @@ int main() {
                    .Validate();
     std::cout << "batch result: " << res << std::endl;
     cm.ShowCanvas();
-  }
+  }*/
 
   {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
