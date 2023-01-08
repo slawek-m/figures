@@ -7,12 +7,13 @@
 #include "Canvas.h"
 #include "CanvasImpl.h"
 #include "Figure.h"
+#include "Mtx.h"
 
 template <class T> class CanvasManager {
 public:
   CanvasManager(const Canvas<T> &canvas);
   CanvasManager(std::unique_ptr<CanvasImpl<T>> canvas_impl, size_t x_size,
-                size_t y_size);
+                size_t y_size, std::unique_ptr<Mtx> mtx);
   ~CanvasManager() = default;
   int AddRectangle(int ulx, int uly, int lrx, int lry, int color);
   int AddCircle(int x, int y, int radius, int color);
@@ -32,6 +33,7 @@ private:
   size_t m_y_size;
 
   std::map<unsigned int, std::unique_ptr<Figure<T>>> m_figures;
+  std::unique_ptr<Mtx> m_mtx;
 };
 
 #endif

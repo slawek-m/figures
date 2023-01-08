@@ -6,6 +6,7 @@
 #include "CanvasAtomicImpl.h"
 #include "CanvasManager.h"
 #include "CanvasNonAtomicImpl.h"
+#include "Mtx.h"
 #include <memory>
 
 /*template <class T, template <class R> class U> class Factory {
@@ -38,7 +39,8 @@ public:
         m_size_x(size_x), m_size_y(size_y){};
   std::shared_ptr<CanvasManager<T>> CreateCanvasManager() {
     m_canvas_manager = std::make_shared<CanvasManager<T>>(
-        std::move(m_canvas_impl), m_size_x, m_size_y);
+        std::move(m_canvas_impl), m_size_x, m_size_y,
+        std::make_unique<MtxFree>());
     return m_canvas_manager;
   };
   std::unique_ptr<Batch<T>> CreateBatch() {
@@ -59,7 +61,8 @@ public:
         m_size_x(size_x), m_size_y(size_y){};
   std::shared_ptr<CanvasManager<T>> CreateCanvasManager() {
     m_canvas_manager = std::make_shared<CanvasManager<T>>(
-        std::move(m_canvas_impl), m_size_x, m_size_y);
+        std::move(m_canvas_impl), m_size_x, m_size_y,
+        std::make_unique<MtxBlocking>());
     return m_canvas_manager;
   };
   std::unique_ptr<Batch<T>> CreateBatch() {
