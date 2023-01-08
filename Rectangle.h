@@ -12,6 +12,7 @@ public:
   void Clear() final;
   void Draw(int offset_x = 0, int offset_y = 0) final;
   void ReDraw(T color) final;
+  std::unique_ptr<Figure<T>> Clone() final;
 
 private:
   int m_ulx;

@@ -53,10 +53,14 @@ void Rectangle<T>::RectangleDraw(T color, int offset_x, int offset_y) {
 
   for (int x = m_ulx; x < m_lrx; ++x) {
     for (int y = m_uly; y < m_lry; ++y) {
-      //std::cout << m_color;
+      // std::cout << m_color;
       Figure<T>::m_owner_ref.SetColor(x, y, color);
     }
   }
+}
+
+template <class T> std::unique_ptr<Figure<T>> Rectangle<T>::Clone() {
+  return std::make_unique<Rectangle<T>>(*this);
 }
 
 template class Rectangle<int>;

@@ -79,7 +79,23 @@ template <class T> bool ColorFigureCmd<T>::Validate(int &id) {
   return Command<T>::m_cm.Validate(m_id);
 };
 
+template <class T>
+CopyFigureCmd<T>::CopyFigureCmd(CanvasManager<T> &cm, int id, int offset_x,
+                                int offset_y)
+    : Command<T>(cm), m_id(id), m_offset_x(offset_x), m_offset_y(offset_y){};
+
+template <class T> void CopyFigureCmd<T>::Execute() {
+  auto new_id = Command<T>::m_cm.CopyFigure(m_id, m_offset_x, m_offset_y);
+  std::cout << "copied figure new id: " << new_id << std::endl;
+};
+
+template <class T> bool CopyFigureCmd<T>::Validate(int &id) {
+  id = m_id;
+  return Command<T>::m_cm.Validate(m_id);
+};
+
 template class AddFigureCmd<int>;
 template class RemoveFigureCmd<int>;
 template class MoveFigureCmd<int>;
 template class ColorFigureCmd<int>;
+template class CopyFigureCmd<int>;

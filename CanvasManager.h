@@ -22,6 +22,7 @@ public:
   void RemoveFigure(int id);
   void MoveFigure(int id, int offset_x, int offset_y);
   void ColorFigure(int id, int color);
+  int CopyFigure(int id, int offset_x, int offset_y);
   bool Validate(int id);
   void ShowCanvas();
   std::unique_ptr<Canvas<T>> CloneCanvas();

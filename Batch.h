@@ -17,6 +17,7 @@ public:
   Batch &RemoveFigure(int id);
   Batch &MoveFigure(int id, int offset_x, int offset_y);
   Batch &ColorFigure(int id, int color);
+  Batch &CopyFigure(int id, int offset_x, int offset_y);
 
   virtual Batch &Execute();
   bool Validate();

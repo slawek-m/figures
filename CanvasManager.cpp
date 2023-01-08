@@ -16,7 +16,8 @@ template <class T>
 CanvasManager<T>::CanvasManager(const Canvas<T> &canvas)
     : m_next_id(1), m_canvas(canvas){};
 
-//below methods are not used in command.Execute() method and can't by parallelized
+// below methods are not used in command.Execute() method and can't by
+// parallelized
 template <class T>
 int CanvasManager<T>::AddRectangle(int ulx, int uly, int lrx, int lry,
                                    int color) {
@@ -40,7 +41,22 @@ int CanvasManager<T>::AddTriangle(int x, int y, int h, int color) {
   return id;
 };
 
-//below methods are used in command.Execute() method and can by parallelized
+template <class T> bool CanvasManager<T>::Validate(int id) {
+  if (m_figures.count(id) > 0) {
+    return m_figures.at(id)->IsNotOverlaped();
+  }
+  return true;
+}
+
+template <class T> void CanvasManager<T>::ShowCanvas() {
+  m_canvas.DrawCanvas();
+}
+
+template <class T> std::unique_ptr<Canvas<T>> CanvasManager<T>::CloneCanvas() {
+  return m_canvas.Clone();
+}
+
+// below methods are used in command.Execute() method and can by parallelized
 template <class T> void CanvasManager<T>::DrawFigure(int id) {
   m_figures.at(id)->Draw();
 }
@@ -81,23 +97,21 @@ template <class T> void CanvasManager<T>::ColorFigure(int id, int color) {
   }
 };
 
-template <class T> bool CanvasManager<T>::Validate(int id) {
+template <class T>
+int CanvasManager<T>::CopyFigure(int id, int offset_x, int offset_y) {
+  int id_new = 0;
   int count = 0;
   m_mtx->lock();
   count = m_figures.count(id);
   m_mtx->unlock();
   if (count > 0) {
-    return m_figures.at(id)->IsNotOverlaped();
+    m_mtx->lock();
+    id_new = m_next_id++;
+    m_mtx->unlock();
+    m_figures[id_new] = m_figures.at(id)->Clone();
+    m_figures.at(id_new)->Draw(offset_x, offset_y);
   }
-  return true;
-}
-
-template <class T> void CanvasManager<T>::ShowCanvas() {
-  m_canvas.DrawCanvas();
-}
-
-template <class T> std::unique_ptr<Canvas<T>> CanvasManager<T>::CloneCanvas() {
-  return m_canvas.Clone();
-}
+  return id_new;
+};
 
 template class CanvasManager<int>;

@@ -66,4 +66,8 @@ void Circle<T>::CircleDraw(T color, int offset_x, int offset_y) {
   }
 }
 
+template <class T> std::unique_ptr<Figure<T>> Circle<T>::Clone() {
+  return std::make_unique<Circle<T>>(*this);
+}
+
 template class Circle<int>;

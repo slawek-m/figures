@@ -37,6 +37,13 @@ template <class T> Batch<T> &Batch<T>::ColorFigure(int id, int color) {
   return *this;
 };
 
+template <class T>
+Batch<T> &Batch<T>::CopyFigure(int id, int offset_x, int offset_y) {
+  m_batch.push_back(
+      std::make_unique<CopyFigureCmd<T>>(m_cm, id, offset_x, offset_y));
+  return *this;
+};
+
 template <class T> Batch<T> &Batch<T>::Execute() {
   std::for_each(m_batch.begin(), m_batch.end(),
                 [](auto &ptr) { ptr->Execute(); });

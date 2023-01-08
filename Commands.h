@@ -54,4 +54,17 @@ private:
   int m_color;
 };
 
+template <class T> class CopyFigureCmd : public Command<T> {
+public:
+  CopyFigureCmd(CanvasManager<T> &cm, int id, int offset_x, int offset_y);
+  ~CopyFigureCmd() = default;
+  void Execute() final;
+  bool Validate(int &id) final;
+
+private:
+  int m_id;
+  int m_offset_x;
+  int m_offset_y;
+};
+
 #endif

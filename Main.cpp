@@ -8,6 +8,22 @@ int main() {
     auto bt = factory.CreateBatch();
 
     RectangleParams r1{0, 0, 20, 20, 1};
+
+    bool res = bt->AddFigure(r1).Execute().Validate();
+    std::cout << "batch result: " << res << std::endl;
+    cm->ShowCanvas();
+
+    res = bt->CopyFigure(1, 30, 30).Execute().Validate();
+    std::cout << "batch result: " << res << std::endl;
+    cm->ShowCanvas();
+  }
+
+  {
+    Factory<int, CanvasAtomicImpl> factory(80, 80);
+    auto cm = factory.CreateCanvasManager();
+    auto bt = factory.CreateBatch();
+
+    RectangleParams r1{0, 0, 20, 20, 1};
     RectangleParams r2{30, 30, 50, 50, 2};
 
     bool res = bt->AddFigure(r1).AddFigure(r2).Execute().Validate();

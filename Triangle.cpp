@@ -44,4 +44,8 @@ void Triangle<T>::TriangleDraw(T color, int offset_x, int offset_y) {
   }
 }
 
+template <class T> std::unique_ptr<Figure<T>> Triangle<T>::Clone() {
+  return std::make_unique<Triangle<T>>(*this);
+}
+
 template class Triangle<int>;

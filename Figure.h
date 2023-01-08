@@ -1,6 +1,8 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
+#include <memory>
+
 template <class T> class Canvas;
 
 template <class T> class Figure {
@@ -12,6 +14,7 @@ public:
   virtual void Clear() = 0;
   virtual void Draw(int offset_x = 0, int offset_y = 0) = 0;
   virtual void ReDraw(T color) = 0;
+  virtual std::unique_ptr<Figure<T>> Clone() = 0;
 
 protected:
   Canvas<T> &m_owner_ref;
