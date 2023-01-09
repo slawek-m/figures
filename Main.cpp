@@ -92,7 +92,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     RectangleParams r1{0, 0, 2, 2, 1};
     RectangleParams r2{0, 0, 2, 2, 2};
@@ -107,7 +107,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     RectangleParams r1{0, 0, 2, 2, 1};
     RectangleParams r2{0, 0, 2, 2, 2};
@@ -122,7 +122,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     RectangleParams r1{0, 0, 2, 2, 1};
     RectangleParams r2{3, 3, 5, 5, 2};
@@ -132,7 +132,7 @@ int main() {
     cm.ShowCanvas();
 
     auto clone = cm.CloneCanvas();
-    CanvasManager cm2(*clone);
+    CanvasManager<int> cm2(*clone);
     // cm2.ShowCanvas();
 
     res = bt.MoveFigure(2, -3, -3).Execute().Validate();
@@ -149,7 +149,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     RectangleParams r1{0, 0, 2, 2, 1};
     RectangleParams r2{3, 3, 5, 5, 2};
@@ -167,7 +167,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     CircleParams c1{6, 6, 4, 1};
 
@@ -184,7 +184,7 @@ int main() {
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
     CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
-    Batch bt(cm);
+    Batch<int> bt(cm);
 
     TriangleParams t1{1, 1, 4, 1};
 
