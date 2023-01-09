@@ -63,23 +63,23 @@ template <class T> void CanvasManager<T>::DrawFigure(int id) {
 
 template <class T> void CanvasManager<T>::RemoveFigure(int id) {
   int count = 0;
-  m_mtx->lock();
+  m_mtx->Lock();
   count = m_figures.count(id);
-  m_mtx->unlock();
+  m_mtx->Unlock();
   if (count > 0) {
     m_figures.at(id)->Clear();
-    m_mtx->lock();
+    m_mtx->Lock();
     m_figures.erase(id);
-    m_mtx->unlock();
+    m_mtx->Unlock();
   }
 };
 
 template <class T>
 void CanvasManager<T>::MoveFigure(int id, int offset_x, int offset_y) {
   int count = 0;
-  m_mtx->lock();
+  m_mtx->Lock();
   count = m_figures.count(id);
-  m_mtx->unlock();
+  m_mtx->Unlock();
   if (count > 0) {
     m_figures.at(id)->Clear();
     m_figures.at(id)->Draw(offset_x, offset_y);
@@ -88,9 +88,9 @@ void CanvasManager<T>::MoveFigure(int id, int offset_x, int offset_y) {
 
 template <class T> void CanvasManager<T>::ColorFigure(int id, int color) {
   int count = 0;
-  m_mtx->lock();
+  m_mtx->Lock();
   count = m_figures.count(id);
-  m_mtx->unlock();
+  m_mtx->Unlock();
   if (count > 0) {
     m_figures.at(id)->Clear();
     m_figures.at(id)->ReDraw(color);
@@ -101,13 +101,13 @@ template <class T>
 int CanvasManager<T>::CopyFigure(int id, int offset_x, int offset_y) {
   int id_new = 0;
   int count = 0;
-  m_mtx->lock();
+  m_mtx->Lock();
   count = m_figures.count(id);
-  m_mtx->unlock();
+  m_mtx->Unlock();
   if (count > 0) {
-    m_mtx->lock();
+    m_mtx->Lock();
     id_new = m_next_id++;
-    m_mtx->unlock();
+    m_mtx->Unlock();
     m_figures[id_new] = m_figures.at(id)->Clone();
     m_figures.at(id_new)->Draw(offset_x, offset_y);
   }
