@@ -37,7 +37,7 @@ int main() {
   /*{
     auto cai = std::make_unique<CanvasAtomicImpl<int>>();
     auto bmtx = std::make_unique<MtxFree>();
-    CanvasManager<int> cm(std::move(cai), 80, 80, bmtx);
+    CanvasManager<int> cm(std::move(cai), 80, 80, std::move(bmtx));
     BatchParallel<int> bt(cm);
 
     RectangleParams r1{0, 0, 20, 20, 1};
@@ -72,7 +72,7 @@ int main() {
   /*{
     auto cnai = std::make_unique<CanvasNonAtomicImpl<int>>();
     auto fmtx = std::make_unique<MtxFree>();
-    CanvasManager<int> cm(std::move(cnai), 16, 16, fmtx);
+    CanvasManager<int> cm(std::move(cnai), 16, 16, std::move(fmtx));
     Batch<int> bt(cm);
 
     RectangleParams r1{0, 0, 2, 2, 1};
